@@ -4,16 +4,14 @@ echo "Git Checkout"
 
 if [ ! -d "hello-world" ];then
 
-git clone https://github.com/parveensindhwani/hello-world.git
-
 echo "Directory not exist"
 
+git clone https://github.com/parveensindhwani/hello-world.git
 cd hello-world
 
 else
 
 echo "Directory already there"
-
 cd hello-world
 git pull
 
@@ -26,22 +24,15 @@ export PATH=$PATH:$MAVEN_HOME:$JAVA_HOME
 mvn clean install package
 cd ..
 
-echo "Installing Apache Tomcat"
-
 if [ ! -d "apache-tomcat-8.5.47" ];then
-
+echo "Installing Apache Tomcat"
 wget http://apachemirror.wuchna.com/tomcat/tomcat-8/v8.5.47/bin/apache-tomcat-8.5.47.tar.gz
 tar -xzvf apache-tomcat-8.5.47.tar.gz
 
 else
-
 echo "Tomact is already installed"
-
 fi
-
-
 echo "Deployment"
-
 ps aux |grep "apache-tomcat" |grep -v "grep"
 
 if [[ $? -ne 0 ]];then
