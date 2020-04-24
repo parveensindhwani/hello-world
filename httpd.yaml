@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  vars:
+    package_name: httpd
+  tasks:
+    - name: installting "{{ package_name }}"
+      yum:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - "{{ package_name }}"
+        - elinks
+        - wget
+    - name: Starting Service
+      service:
+        name: "{{ package_name }}"
+        state: started
+        enabled: yes
