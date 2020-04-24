@@ -1,15 +1,10 @@
 pipeline {
-   agent any
-      tools {
-            jdk "Java-1.8"
-            maven "Maven-3.6.1"
-      }
       stages {
         stage ('Git Checkout ') {
 
             steps {
                 git branch: 'master',
-                    credentialsId: 'gitcredentials',
+                    credentialsId: 'git-credentials',
                     url: 'https://github.com/parveensindhwani/hello-world.git'
                 }
             }
@@ -28,13 +23,10 @@ pipeline {
 		   steps {
 		      sh '''
 		      cd $WORKSPACE
-		      sudo cp $WORKSPACE/webapp/target/webapp.war $WORKSPACE
-		      sudo docker build -t "tomcat:1.0" .
-		      sudo docker rm -f webapp
-		      sudo docker run --name webapp -d -p 80:8080 tomcat:1.0
-			  
-			  
-			  '''
+		      sudo /root/apache-tomcat-8.5.54/bin/shutdown.sh
+		      sudo cp webapp/target/webapp.war /root/apache-tomcat-8.5.54/webapps/
+                      sudo /root/apache-tomcat-8.5.54/bin/startup.sh  
+		      '''
 			      }
             }
 		
