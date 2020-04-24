@@ -1,0 +1,22 @@
+---
+  - name: Deployment of jenkins demo application
+    hosts: all
+    become: true
+    tasks:
+      - name: Building code
+        command: mvn clean install package
+        delegate_to: 127.0.0.1
+        #local_action:
+        #  module: shell
+        #  _raw_params: mvn clean install package
+
+      - name: stopping application
+        shell: /root/apache-tomcat-8.5.54/bin/shutdown.sh
+
+      - name: Copying application to remote server
+        copy:
+          src: /var/lib/jenkins/workspace/demo/webapp/target/webapp.war
+          dest: /root/apache-tomcat-8.5.54/webapps/
+
+      - name: Starting tomcat
+        shell: /root/apache-tomcat-8.5.54/bin/startup.sh
