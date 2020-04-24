@@ -15,7 +15,7 @@
 
       - name: Copying application to remote server
         copy:
-          src: /var/lib/jenkins/workspace/demo/webapp/target/webapp.war
+          src: /var/lib/jenkins/workspace/ansible-demo-2/webapp/target/webapp.war
           dest: /root/apache-tomcat-8.5.54/webapps/
 
       - name: Starting tomcat
