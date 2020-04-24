@@ -19,4 +19,4 @@
           dest: /root/apache-tomcat-8.5.54/webapps/
 
       - name: Starting tomcat
-        shell: /root/apache-tomcat-8.5.54/bin/startup.sh
+        shell: sudo /root/apache-tomcat-8.5.54/bin/startup.sh
