@@ -1,4 +1,3 @@
-def build_cause = currentBuild.getBuildCauses()[0].shortDescription
 pipeline {
   agent any
   triggers {
