@@ -16,7 +16,10 @@ pipeline {
 			
 		stage ('Build') {
 		   steps {
+		      def buildCauses = currentBuild.rawBuild.getCauses()
+		      print buildCauses
 		      sh '''
+		          echo $buildCauses
 		          echo "it is run ${BUILD_USER} test: env.BUILD_USER"
 			  cd $WORKSPACE
 			  mvn clean install package
