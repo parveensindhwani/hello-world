@@ -21,7 +21,7 @@ pipeline {
           echo "this var is coming from top"
 
           // e.g. "Current build was caused by: Started by GitHub push by mirekphd"
-          // vs. "Started by timer"
+          // vs. "Started by timer dummy"
 }
 		       
 		   }
