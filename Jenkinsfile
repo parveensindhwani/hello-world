@@ -22,7 +22,7 @@ pipeline {
           echo "Current build was caused by: ${buildCause}\n"
 
           // e.g. "Current build was caused by: Started by GitHub push by mirekphd test"
-          // vs. "Started by timer"
+          // vs. "Started by timer dummy"
 
         }
 			      }
