@@ -1,3 +1,4 @@
+def build_cause = currentBuild.getBuildCauses()[0].shortDescription
 pipeline {
   agent any
   triggers {
@@ -16,6 +17,7 @@ pipeline {
 		stage ('Build') {
 		   steps {
 		      sh '''
+		          echo $build_cause
 		          echo "webhook"
 			  cd $WORKSPACE
 			  mvn clean install package
