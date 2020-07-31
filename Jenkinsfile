@@ -17,8 +17,7 @@ pipeline {
 		stage ('Build') {
 		   steps {
 		      sh '''
-		          echo $build_cause
-		          echo "webhook"
+		          echo "it is run ${build_cause}"
 			  cd $WORKSPACE
 			  mvn clean install package
 			  
