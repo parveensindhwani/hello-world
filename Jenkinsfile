@@ -13,6 +13,7 @@ pipeline {
 		stage ('Build') {
 		   steps {
 		      sh '''
+		          echo "webhook"
 			  cd $WORKSPACE
 			  mvn clean install package
 			  
