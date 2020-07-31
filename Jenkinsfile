@@ -13,11 +13,24 @@ pipeline {
                     url: 'https://github.com/parveensindhwani/hello-world.git'
                 }
             }
+	      
+	     stage ('check hook') {
+		   steps {
+		      script {
+
+          // get build cause (time triggered vs. SCM change)
+          def buildCause = currentBuild.getBuildCauses()[0].shortDescription
+          echo "Current build was caused by: ${buildCause}\n"
+
+          // e.g. "Current build was caused by: Started by GitHub push by mirekphd"
+          // vs. "Started by timer"
+
+        }
+			      }
+            }
 			
 		stage ('Build') {
 		   steps {
-		      def buildCauses = currentBuild.rawBuild.getCauses()
-		      print buildCauses
 		      sh '''
 		          echo $buildCauses
 		          echo "it is run ${BUILD_USER} test: env.BUILD_USER"
