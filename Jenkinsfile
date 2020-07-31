@@ -31,7 +31,7 @@ pipeline {
 		stage ('Build') {
 		   steps {
 		      sh '''
-		          echo $buildCauses
+		          echo "${buildCause}"
 		          echo "it is run ${BUILD_USER} test: env.BUILD_USER"
 			  cd $WORKSPACE
 			  mvn clean install package
