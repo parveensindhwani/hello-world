@@ -1,57 +1,31 @@
+def buildCause = currentBuild.getBuildCauses()[0].shortDescription
+print buildCause
+if( buildCause =~ 'Started by GitHub push' ) {
+	print "triggered by hook"
+	mvn_command='package'
+	sh "echo ${buildCause}"
+}
 pipeline {
   agent any
   triggers {
     githubPush()
   }
-      stages {
-        stage ('Git Checkout ') {
-
-            steps {
-                git branch: 'master',
-                    credentialsId: 'git-credentials',
-                    url: 'https://github.com/parveensindhwani/hello-world.git'
-                }
-            }
-	      
+      stages {    
 	     stage ('check hook') {
 		   steps {
 		      script {
 
           // get build cause (time triggered vs. SCM change)
-          def buildCause = currentBuild.getBuildCauses()[0].shortDescription
+          // def buildCause = currentBuild.getBuildCauses()[0].shortDescription
           echo "Current build was caused by: ${buildCause}\n"
+          echo "this var is coming from top"
 
-          // e.g. "Current build was caused by: Started by GitHub push by mirekphd test"
+          // e.g. "Current build was caused by: Started by GitHub push by mirekphd"
           // vs. "Started by timer"
-
-        }
-			      }
-            }
-			
-		stage ('Build') {
-		   steps {
-		      sh '''
-		          echo "${buildCause}"
-		          echo "it is run ${BUILD_USER} test: env.BUILD_USER"
-			  cd $WORKSPACE
-			  mvn clean install package
-			  
-			  
-			  '''
-			      }
-            }
-		stage ('Deploy') {
-		   steps {
-		      sh '''
-		      cd $WORKSPACE
-		      sudo /root/apache-tomcat-8.5.54/bin/shutdown.sh
-		      sudo cp webapp/target/webapp.war /root/apache-tomcat-8.5.54/webapps/
-                      sudo /root/apache-tomcat-8.5.54/bin/startup.sh  
-		      '''
-			      }
-            }
+}
+		       
+		   }
+          }
 		
-		
-		
-		}
-	} 
+      }
+}
