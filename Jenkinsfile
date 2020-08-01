@@ -7,7 +7,7 @@ pipeline {
         stage ('Git Checkout ') {
 
             steps {
-                git branch: 'master',
+                git branch: 'develop',
                     credentialsId: 'git-credentials',
                     url: 'https://github.com/parveensindhwani/hello-world.git'
                 }
