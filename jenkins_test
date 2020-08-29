@@ -2,14 +2,15 @@ pipeline {
     agent any
     parameters {
         choice(name: 'ENV', choices: ['lab', 'stage', 'dev'], description: '')
-		string(name: 'GIT_BRANCH', defaultValue: 'staging', description: '')
+        string(name: 'BRANCH_NAME', defaultValue: 'staging', description: '')
     }
     stages {
 	    stage('Checkout') {
             steps {
-              git branch: "${GIT_BRANCH}",
-              credentialsId: 'git-credentials',
-              url: 'https://github.com/parveensindhwani/hello-world.git'
+	      echo "Testing"
+              //git branch: "${GIT_BRANCH}",
+              //credentialsId: 'git-credentials',
+              //url: 'https://github.com/parveensindhwani/hello-world.git'
             }
                 
             }    
