@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    parameters {
+        choice(name: 'ENV', choices: ['lab', 'stage', 'dev'], description: '')
+		string(name: 'GIT_BRANCH', defaultValue: 'staging', description: '')
+    }
+    stages {
+	    stage('Checkout') {
+            steps {
+              git branch: "${GIT_BRANCH}",
+              credentialsId: 'git-credentials',
+              url: 'https://github.com/parveensindhwani/hello-world.git'
+            }
+                
+            }    
+        stage('When check dev') {
+            when {
+                expression { 
+                    ENV == 'dev' 
+                    
+                }
+            }
+            steps {
+                echo 'Running for Dev environment'
+            }
+        }
+        stage('when check lab') {
+            when {
+                expression { 
+                    ENV == 'lab' 
+                    
+                }
+            }
+            steps {
+                echo 'Running for lab environment'
+            }
+        }
+    }
+}
