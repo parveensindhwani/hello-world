@@ -17,7 +17,7 @@ pipeline {
         stage('When check dev') {
             when {
                 expression { 
-                    ENV == 'dev' 
+                    return env.ENV == 'dev' 
                     
                 }
             }
@@ -28,7 +28,7 @@ pipeline {
         stage('when check lab') {
             when {
                 expression { 
-                    ENV == 'lab' 
+                    return env.ENV == 'lab' 
                     
                 }
             }
