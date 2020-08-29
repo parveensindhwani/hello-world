@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         choice(name: 'ENV', choices: ['lab', 'stage', 'dev'], description: '')
-        string(name: 'BRANCH_NAME', defaultValue: 'staging', description: '')
+	gitParameter branchFilter: 'origin/(.*)', defaultValue: 'develop', name: 'BRANCH_NAME', type: 'PT_BRANCH'
     }
     stages {
 	    stage('Checkout') {
