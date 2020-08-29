@@ -7,7 +7,7 @@ pipeline {
     stages {
 	    stage('Checkout') {
             steps {
-	      echo "Testing"
+	      echo "Testing 1"
               //git branch: "${GIT_BRANCH}",
               //credentialsId: 'git-credentials',
               //url: 'https://github.com/parveensindhwani/hello-world.git'
